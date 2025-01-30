@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "CommonJS",
+      "jsx": "react-jsx",
+      "outDir": "dist",
+      "strict": true,
+      "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"]
+    },
+    "include": ["src"]
+  }
+  
