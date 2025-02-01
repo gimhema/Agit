@@ -18,7 +18,7 @@ const App = () => {
   return (
     <Box sx={{ display: "flex", height: "100vh", backgroundColor: "gray.100" }}>
       {/* 🔹 좌측 패널 (5:1 비율) */}
-      <Box sx={{ flex: 5, backgroundColor: "#3F0E40", color: "white", p: 4, display: "flex", flexDirection: "column" }}>
+      <Box sx={{ flex: 1, backgroundColor: "#3F0E40", color: "white", p: 4, display: "flex", flexDirection: "column" }}>
         <Typography variant="h5" fontWeight="bold" display="flex" alignItems="center" gap={1} mb={3}>
           <Menu /> My Slack
         </Typography>
@@ -64,7 +64,7 @@ const App = () => {
       </Box>
 
       {/* 🔹 우측 채팅 영역 (5:1 비율) */}
-      <Box sx={{ flex: 1, display: "flex", flexDirection: "column", backgroundColor: "white" }}>
+      <Box sx={{ flex: 5, display: "flex", flexDirection: "column", backgroundColor: "white" }}>
         {/* 🔸 채팅 헤더 */}
         <Box sx={{ p: 3, borderBottom: "1px solid gray", display: "flex", alignItems: "center", backgroundColor: "white" }}>
           <Typography variant="h6">#{selectedChannel}</Typography>
