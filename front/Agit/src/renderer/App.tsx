@@ -16,15 +16,15 @@ const App = () => {
   };
 
   return (
-    <Box className="flex h-screen bg-gray-100">
-      {/* 🔹 사이드바 */}
-      <Box className="w-72 bg-[#3F0E40] text-white p-4 flex flex-col">
+    <Box sx={{ display: "flex", height: "100vh", backgroundColor: "gray.100" }}>
+      {/* 🔹 좌측 패널 (5:1 비율) */}
+      <Box sx={{ flex: 5, backgroundColor: "#3F0E40", color: "white", p: 4, display: "flex", flexDirection: "column" }}>
         <Typography variant="h5" fontWeight="bold" display="flex" alignItems="center" gap={1} mb={3}>
           <Menu /> My Slack
         </Typography>
 
         {/* 사용자 정보 */}
-        <Box className="flex items-center gap-3 p-2 bg-[#4A154B] rounded-lg">
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2, p: 2, backgroundColor: "#4A154B", borderRadius: 2 }}>
           <Avatar sx={{ bgcolor: "gray" }}>
             <AccountCircle />
           </Avatar>
@@ -35,7 +35,7 @@ const App = () => {
         </Box>
 
         {/* 채널 목록 */}
-        <Box className="flex-1 mt-4">
+        <Box sx={{ flex: 1, mt: 3, overflowY: "auto" }}>
           <Typography variant="body2" color="gray" mb={2}>Channels</Typography>
           <List>
             {channels.map((channel) => (
@@ -48,7 +48,6 @@ const App = () => {
                   borderRadius: 1,
                 }}
               >
-                {/* 텍스트로 `#` 기호 추가 */}
                 <Typography sx={{ fontSize: 18 }}>#</Typography>
                 <ListItemText primary={channel} />
               </ListItemButton>
@@ -58,34 +57,32 @@ const App = () => {
 
         {/* 설정 아이콘 */}
         <Divider sx={{ borderColor: "#5E3B66" }} />
-        <Box className="p-3 flex justify-between items-center">
+        <Box sx={{ p: 3, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <Typography variant="body2" color="gray">Settings</Typography>
           <Settings sx={{ fontSize: 18 }} />
         </Box>
       </Box>
 
-      {/* 🔹 메인 채팅 영역 */}
-      <Box className="flex flex-col flex-1">
+      {/* 🔹 우측 채팅 영역 (5:1 비율) */}
+      <Box sx={{ flex: 1, display: "flex", flexDirection: "column", backgroundColor: "white" }}>
         {/* 🔸 채팅 헤더 */}
-        <Box className="bg-white p-4 border-b flex items-center shadow-md">
+        <Box sx={{ p: 3, borderBottom: "1px solid gray", display: "flex", alignItems: "center", backgroundColor: "white" }}>
           <Typography variant="h6">#{selectedChannel}</Typography>
         </Box>
 
         {/* 🔸 채팅 메시지 영역 */}
-        <Box className="flex-1 p-4 overflow-auto" sx={{ paddingBottom: 50 }}>
+        <Box sx={{ flex: 1, p: 3, overflowY: "auto" }}>
           {messages.length === 0 ? (
             <Typography variant="body2" color="gray" textAlign="center">No messages yet</Typography>
           ) : (
             messages.map((msg, index) => (
-              <Box key={index} display="flex" alignItems="flex-start" gap={2} mb={4}>
-                {/* 프로필 이미지 */}
+              <Box key={index} display="flex" alignItems="flex-start" gap={2} mb={3}>
                 <Avatar sx={{ bgcolor: "gray" }}>{msg.user[0]}</Avatar>
-                {/* 메시지 박스 */}
                 <Box>
                   <Typography variant="body2" fontWeight="bold">
                     {msg.user} <Typography variant="caption" color="gray" component="span">{msg.time}</Typography>
                   </Typography>
-                  <Paper sx={{ padding: 2, borderRadius: 2, boxShadow: 1 }}>
+                  <Paper sx={{ padding: 2, borderRadius: 2 }}>
                     <Typography variant="body2">{msg.text}</Typography>
                   </Paper>
                 </Box>
@@ -95,7 +92,7 @@ const App = () => {
         </Box>
 
         {/* 🔸 채팅 입력창 */}
-        <Box className="p-4 bg-white border-t flex items-center shadow-md">
+        <Box sx={{ p: 3, borderTop: "1px solid gray", display: "flex", alignItems: "center", backgroundColor: "white" }}>
           <TextField
             fullWidth
             variant="outlined"
@@ -103,23 +100,10 @@ const App = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-            sx={{
-              borderRadius: 50,
-              marginRight: 2,
-            }}
+            sx={{ borderRadius: 50, marginRight: 2 }}
           />
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={sendMessage}
-            sx={{
-              borderRadius: 50,
-              paddingLeft: 3,
-              paddingRight: 3,
-            }}
-          >
-            <Send sx={{ fontSize: 18 }} />
-            Send
+          <Button variant="contained" color="primary" onClick={sendMessage} sx={{ borderRadius: 50 }}>
+            <Send />
           </Button>
         </Box>
       </Box>
