@@ -4,9 +4,10 @@
 namespace AgitBack.AgitUser
 {
     // 서버내에서 순회, 검색등을 하기위해 사용되는 식별자
+    // 자동으로 생성됨
     public class AgitUserServerInfo
     {
-        private ulong serverId {get; set;} // 서버내에서만 잔존됨
+        private int serverId {get; set;} // 서버내에서만 잔존됨
 
         private string uid {get; set;} // DB에 저장되는 고유 식별자
     }
@@ -63,7 +64,7 @@ namespace AgitBack.AgitUser
             this.userProfile = new UserProfile();
         }
 
-        
+
     }
 
 }
