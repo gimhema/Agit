@@ -7,17 +7,17 @@ namespace AgitBack.AgitUser
     // 자동으로 생성됨
     public class AgitUserServerInfo
     {
-        private int serverId {get; set;} // 서버내에서만 잔존됨
+        public int serverId {get; set;} // 서버내에서만 잔존됨
 
-        private string uid {get; set;} // DB에 저장되는 고유 식별자
+        public string uid {get; set;} // DB에 저장되는 고유 식별자
     }
 
     // 계정 정보
     public class AccountInfo
     {
-        private string userID {get; set;}
-        private string userChatName {get; set;}
-        private string userPassword {get; set;}
+        public string userID {get; set;}
+        public string userChatName {get; set;}
+        public string userPassword {get; set;}
 
         public AccountInfo(string _id, string _chatName, string _password)
         {
@@ -29,11 +29,11 @@ namespace AgitBack.AgitUser
 
     public class UserProfile
     {
-        private string userEmail {get; set;}
+        public string userEmail {get; set;}
 
-        private string userPhoneNumber {get; set;}
+        public string userPhoneNumber {get; set;}
 
-        private string userBio {get; set;}
+        public string userBio {get; set;}
 
         public UserProfile()
         {
@@ -52,9 +52,9 @@ namespace AgitBack.AgitUser
 
     public class User
     {
-        private AgitUserServerInfo userServerInfo {get; set;}
-        private AccountInfo userAccountInfo {get; set;}
-        private UserProfile userProfile {get; set;}
+        public AgitUserServerInfo userServerInfo {get; set;}
+        public AccountInfo userAccountInfo {get; set;}
+        public UserProfile userProfile {get; set;}
 
         public User(AgitUserServerInfo _newServerInfo, AccountInfo _newAccountInfo)
         {
