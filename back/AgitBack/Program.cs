@@ -4,4 +4,4 @@
 
 AgitMainServer server = new AgitMainServer();
 
-server.Run();
+server.Start();
