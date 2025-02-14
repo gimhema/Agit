@@ -69,9 +69,7 @@ namespace AgitBack.WebsocketHandler
                     string message = Encoding.UTF8.GetString(buffer, 0, result.Count);
                     Console.WriteLine($"받은 메시지: {message}");
 
-                    // 에코 메시지 전송
-                    byte[] responseBuffer = Encoding.UTF8.GetBytes($"Echo: {message}");
-                    await webSocket.SendAsync(new ArraySegment<byte>(responseBuffer), WebSocketMessageType.Text, true, CancellationToken.None);
+                    // await SendMessageAsync(webSocket, $"Echo: {message}");
                 }
             }
             catch (Exception ex)
@@ -81,6 +79,26 @@ namespace AgitBack.WebsocketHandler
             finally
             {
                 webSocket.Dispose();
+            }
+        }
+
+        public async Task SendMessageAsync(WebSocket webSocket, string message)
+        {
+            if (webSocket == null || webSocket.State != WebSocketState.Open)
+            {
+                Console.WriteLine("[Error] WebSocket이 닫혀 있어 메시지를 보낼 수 없습니다.");
+                return;
+            }
+
+            try
+            {
+                byte[] responseBuffer = Encoding.UTF8.GetBytes(message);
+                await webSocket.SendAsync(new ArraySegment<byte>(responseBuffer), WebSocketMessageType.Text, true, CancellationToken.None);
+                Console.WriteLine($"보낸 메시지: {message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Error] WebSocket 메시지 전송 중 오류 발생: {ex.Message}");
             }
         }
 
