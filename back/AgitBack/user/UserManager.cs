@@ -88,6 +88,43 @@ namespace AgitBack.UserManager
             this.userNum = this.userContainer.Count();
         }
 
+        public void RemoveUserByServerIndex(int _idx)
+        {
+            if (!this.userServerIndexSearchContainer.ContainsKey(_idx))
+            {
+                Console.WriteLine($"[Error] Invalid index {_idx} for user removal.");
+                return;
+            }
+
+            if (_idx < 0 || _idx >= this.userContainer.Count)
+            {
+                Console.WriteLine($"[Error] Index {_idx} is out of range.");
+                return;
+            }
+
+            User _removeTarget = this.userServerIndexSearchContainer[_idx];
+
+            if (_removeTarget == null || 
+                _removeTarget.userAccountInfo == null || 
+                _removeTarget.userServerInfo == null)
+            {
+                Console.WriteLine($"[Error] User at index {_idx} has invalid data.");
+                return;
+            }
+
+            string _removeKeyUserID = _removeTarget.userAccountInfo.userID;
+            string _removeKeyUserName = _removeTarget.userAccountInfo.userChatName;
+            string _removeKeyUID = _removeTarget.userServerInfo.uid;
+
+            // 컨테이너에서 유저 정보 삭제
+            this.userContainer.RemoveAt(_idx);
+            this.userServerIndexSearchContainer.Remove(_idx);
+            this.userIdSearchContainer.Remove(_removeKeyUserID);
+            this.userUserNameSearchContainer.Remove(_removeKeyUserName);
+            this.userUIDSearchContainer.Remove(_removeKeyUID);
+        }
+
+
     }
 
 }
