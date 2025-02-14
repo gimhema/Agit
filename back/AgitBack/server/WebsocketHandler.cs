@@ -17,15 +17,6 @@ namespace AgitBack.WebsocketHandler
         {
             // Event Manager create . . .
             eventManager.Init();
-
-            // Websocket create . . .
-            httpListener = new HttpListener();
-            httpListener.Prefixes.Add("http://localhost:8080/ws/"); // 웹소켓 엔드포인트 설정
-            httpListener.Start();
-            
-            Console.WriteLine("WebSocket 서버가 시작되었습니다.");
-
-            _ = AcceptWebSocketClients(); // 클라이언트 수락 비동기 처리
         }
 
         private async Task AcceptWebSocketClients()
@@ -95,7 +86,14 @@ namespace AgitBack.WebsocketHandler
 
         public void Spin()
         {
-            // 추후 추가 가능
+            // Websocket create . . .
+            httpListener = new HttpListener();
+            httpListener.Prefixes.Add("http://localhost:8080/ws/"); // 웹소켓 엔드포인트 설정
+            httpListener.Start();
+            
+            Console.WriteLine("WebSocket 서버가 시작되었습니다.");
+
+            _ = AcceptWebSocketClients(); // 클라이언트 수락 비동기 처리
         }
     }
 }
