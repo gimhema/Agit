@@ -49,11 +49,8 @@ namespace AgitBack.AgitAsyncEvent
 
         public void InitEventHandler()
         {
-            // ServeEventHandler helloHandler = (msg) => Console.WriteLine($"Hello Handler: {msg}");
-            // ServeEventHandler goodbyeHandler = (msg) => Console.WriteLine($"Goodbye Handler: {msg}");
-            // RegisterHandler("hello", helloHandler);
-            // RegisterHandler("goodbye", goodbyeHandler);
-            RegisterHandler("LoginUnser", Event_LoginUser);
+            RegisterHandler("CreateUser", Event_CreateUser);
+            RegisterHandler("LoginUser", Event_LoginUser);            
         }
 
         public void EventExecution(string eventKey, string message)
