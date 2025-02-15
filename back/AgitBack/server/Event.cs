@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace AgitBack.AgitAsyncEvent
 {
 
-    public class AsyncEventManager
+    public partial class AsyncEventManager
     {
         public delegate void ServeEventHandler(string message);
         private readonly Dictionary<string, ServeEventHandler> _eventHandlers = new();
@@ -61,12 +61,6 @@ namespace AgitBack.AgitAsyncEvent
             HandleMessage(eventKey, message);
         }
 
-        // Server Events . . .
-        public void Event_LoginUser(string msg)
-        {
-
-            
-        }
     }
 
 }
