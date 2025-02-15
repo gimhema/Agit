@@ -11,7 +11,6 @@ namespace AgitBack.AgitAsyncEvent
             try
             {
                 PacketCreateUserAccount deserializedPacket = PacketSuper.Deserialize<PacketCreateUserAccount>(msg);
-
             }
             catch (FormatException)
             {
@@ -24,7 +23,6 @@ namespace AgitBack.AgitAsyncEvent
             try
             {
                 PacketLoginUser deserializedPacket = PacketSuper.Deserialize<PacketLoginUser>(msg);
-
             }
             catch (FormatException)
             {

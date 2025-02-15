@@ -5,6 +5,7 @@ namespace AgitBack.AgitPacket
 {
     public abstract class PacketSuper
     {
+        public string eventKey {get; set;} = "";
         public string Serialize()
         {
             try

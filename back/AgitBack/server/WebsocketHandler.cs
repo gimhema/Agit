@@ -69,6 +69,10 @@ namespace AgitBack.WebsocketHandler
                     string message = Encoding.UTF8.GetString(buffer, 0, result.Count);
                     Console.WriteLine($"받은 메시지: {message}");
 
+                    string _eventKey = ""; // message로부터 분리
+                    string _jsonObjMsg = ""; // message로부터 분리
+                    eventManager.EventExecution(_eventKey, _jsonObjMsg);
+
                     // await SendMessageAsync(webSocket, $"Echo: {message}");
                 }
             }
