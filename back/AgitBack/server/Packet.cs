@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 
 namespace AgitBack.AgitPacket
 {
-     public abstract class PacketSuper
+    public abstract class PacketSuper
     {
         public string Serialize()
         {
