@@ -6,18 +6,17 @@ namespace AgitBack.Server
     
     public class AgitMainServer
     {
-        private AgitWebSockketHandler websocketHandler = new AgitWebSockketHandler();
 
         private void Init()
         {
             // Initialize
-            websocketHandler.Init();
+            AgitWebSockketHandler.Instance.Init();
         }
 
         private void Run()
         {
             // Websocket Async spin
-            websocketHandler.Spin();
+            AgitWebSockketHandler.Instance.Spin();
         }
 
         public void Start()

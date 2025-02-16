@@ -10,7 +10,33 @@ namespace AgitBack.WebsocketHandler
 {
     public class AgitWebSockketHandler
     {
+        private static AgitWebSockketHandler _instance;
+        private static readonly object _lock = new object();
+
         private HttpListener httpListener;
+
+        private AgitWebSockketHandler()
+        {
+
+        }
+
+        public static AgitWebSockketHandler Instance 
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (_lock)
+                    {
+                        if (_instance == null)
+                        {
+                            _instance = new AgitWebSockketHandler();
+                        }
+                    }
+                }
+                return _instance;
+            }
+        }
 
         public void Init()
         {
