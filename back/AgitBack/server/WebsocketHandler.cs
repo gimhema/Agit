@@ -10,7 +10,7 @@ namespace AgitBack.WebsocketHandler
 {
     public class AgitWebSockketHandler
     {
-        private AsyncEventManager eventManager = new AsyncEventManager();
+        // private AsyncEventManager eventManager = new AsyncEventManager();
         private HttpListener httpListener;
 
         public void Init()

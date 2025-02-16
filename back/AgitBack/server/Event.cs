@@ -10,12 +10,32 @@ namespace AgitBack.AgitAsyncEvent
 
     public partial class AsyncEventManager
     {
+        private static AsyncEventManager _instance;
+        private static readonly object _lock = new object();
         public delegate void ServeEventHandler(string message);
         private readonly Dictionary<string, ServeEventHandler> _eventHandlers = new();
 
-        public AsyncEventManager()
+        private AsyncEventManager()
         {
 
+        }
+
+        public static AsyncEventManager Instance 
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (_lock)
+                    {
+                        if (_instance == null)
+                        {
+                            _instance = new AsyncEventManager();
+                        }
+                    }
+                }
+                return _instance;
+            }
         }
 
         public void Init()
