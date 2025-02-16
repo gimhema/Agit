@@ -10,13 +10,12 @@ namespace AgitBack.WebsocketHandler
 {
     public class AgitWebSockketHandler
     {
-        // private AsyncEventManager eventManager = new AsyncEventManager();
         private HttpListener httpListener;
 
         public void Init()
         {
             // Event Manager create . . .
-            eventManager.Init();
+            AsyncEventManager.Instance.Init();
         }
 
         private async Task AcceptWebSocketClients()
@@ -71,7 +70,7 @@ namespace AgitBack.WebsocketHandler
 
                     string _eventKey = ""; // message로부터 분리
                     string _jsonObjMsg = ""; // message로부터 분리
-                    eventManager.EventExecution(_eventKey, _jsonObjMsg);
+                    AsyncEventManager.Instance.EventExecution(_eventKey, _jsonObjMsg);
 
                     // await SendMessageAsync(webSocket, $"Echo: {message}");
                 }
