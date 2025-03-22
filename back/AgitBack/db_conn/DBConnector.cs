@@ -5,9 +5,34 @@ namespace AgitBack.AgitDB
 {
     public class DBConnector
     {
+        private static DBConnector _instance;
+        private static readonly object _lock = new object();
         private SqliteConnection connection;
 
         private bool isConnected = false;
+
+        private DBConnector()
+        {
+
+        }
+
+        public static DBConnector Instance 
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (_lock)
+                    {
+                        if (_instance == null)
+                        {
+                            _instance = new DBConnector();
+                        }
+                    }
+                }
+                return _instance;
+            }
+        }
 
         public void Start()
         {
