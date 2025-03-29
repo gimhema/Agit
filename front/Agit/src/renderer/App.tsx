@@ -1,8 +1,22 @@
 import React, { useState } from "react";
-import { Menu, Send, AccountCircle, Settings } from "@mui/icons-material";
-import { Button, TextField, List, ListItem, ListItemText, Divider, Paper, Typography, Avatar, Box, ListItemButton } from "@mui/material";
+import { Menu as MenuIcon, Send, AccountCircle, Settings } from "@mui/icons-material";
+import { Button, TextField, List, ListItem, ListItemText, Divider, Paper, Typography, Avatar, Box, ListItemButton, Menu, MenuItem, IconButton } from "@mui/material";
+
+
+
 
 const App = () => {
+
+  const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
+
+  const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setMenuAnchor(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setMenuAnchor(null);
+  };
+
   const [channels] = useState(["general", "random", "development"]);
   const [selectedChannel, setSelectedChannel] = useState("general");
   const [messages, setMessages] = useState<{ user: string; text: string; time: string }[]>([]);
@@ -19,9 +33,22 @@ const App = () => {
     <Box sx={{ display: "flex", height: "100vh", backgroundColor: "gray.100" }}>
       {/* 🔹 좌측 패널 (5:1 비율) */}
       <Box sx={{ flex: 1, backgroundColor: "#3F0E40", color: "white", p: 4, display: "flex", flexDirection: "column" }}>
+        
         <Typography variant="h5" fontWeight="bold" display="flex" alignItems="center" gap={1} mb={3}>
-          <Menu /> My Slack
+          {/* 햄버거 버튼 */}
+          <IconButton onClick={handleMenuOpen} sx={{ color: "white" }}>
+            <MenuIcon />
+          </IconButton>
+          My Slack
         </Typography>
+
+        {/* 메뉴 리스트 */}
+        <Menu anchorEl={menuAnchor} open={Boolean(menuAnchor)} onClose={handleMenuClose}>
+          <MenuItem onClick={handleMenuClose}>New Channel</MenuItem>
+          <MenuItem onClick={handleMenuClose}>Invite People</MenuItem>
+          <MenuItem onClick={handleMenuClose}>Settings</MenuItem>
+        </Menu>
+
 
         {/* 사용자 정보 */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 2, p: 2, backgroundColor: "#4A154B", borderRadius: 2 }}>
@@ -61,6 +88,7 @@ const App = () => {
           <Typography variant="body2" color="gray">Settings</Typography>
           <Settings sx={{ fontSize: 18 }} />
         </Box>
+
       </Box>
 
       {/* 🔹 우측 채팅 영역 (5:1 비율) */}
@@ -107,6 +135,8 @@ const App = () => {
           </Button>
         </Box>
       </Box>
+
+      
     </Box>
   );
 };
