@@ -7,12 +7,27 @@ import { Button, TextField, List, ListItem, ListItemText, Divider, Paper, Typogr
 
 const App = () => {
 
-  const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
+  const [sidebarWidth, setSiderbarWidth] = useState(250);
+  const [isResizing, setIsResizing] = useState(false);
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsResizing(true);
+  };
+  const handleMouseMove = (e: MouseEvent) => {
+    if(!isResizing) return;
+    const newWidth = Math.max(200, Math.min(e.clientX, 400));
+    setSiderbarWidth(newWidth);
+  };
+  const handleMouseUp = () => {
+    setIsResizing(false);
+  }
+  
+  
 
+
+  const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
   const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setMenuAnchor(event.currentTarget);
   };
-
   const handleMenuClose = () => {
     setMenuAnchor(null);
   };
