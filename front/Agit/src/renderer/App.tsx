@@ -7,8 +7,8 @@ import Monitoring from "../views/Monitoring";
 const App = () => {
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
   const [isMonitoringView, setIsMonitoringView] = useState(false);
-  const [channels] = useState(["general", "random", "development"]);
-  const [selectedChannel, setSelectedChannel] = useState("general");
+  const [channels] = useState(["Monitoring", "CommandLine", "Charts"]);
+  const [selectedChannel, setSelectedChannel] = useState("CommandLine");
   const [messages, setMessages] = useState<{ user: string; text: string; time: string }[]>([]);
   const [input, setInput] = useState("");
 
@@ -67,7 +67,14 @@ const App = () => {
             {channels.map((channel) => (
               <ListItemButton
                 key={channel}
-                onClick={() => { setSelectedChannel(channel); setIsMonitoringView(false); }}
+                onClick={() => { 
+                  if(channel == "Monitoring") {
+                    setIsMonitoringView(true);
+                    handleMenuClose();
+                  } else {
+                    setSelectedChannel(channel); setIsMonitoringView(false); 
+                  }
+                }}
                 sx={{
                   backgroundColor: selectedChannel === channel ? "#522653" : "transparent",
                   "&:hover": { backgroundColor: "#4A154B" },
