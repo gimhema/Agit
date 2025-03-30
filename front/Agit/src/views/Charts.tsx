@@ -18,7 +18,7 @@ const columns: GridColDef[] = [
   { field: "salary", headerName: "Salary ($)", width: 150, type: "number", editable: true },
 ];
 
-const ExcelTable = () => {
+const Charts = () => {
   const [rows, setRows] = useState(initialRows);
 
   return (
@@ -41,4 +41,4 @@ const ExcelTable = () => {
   );
 };
 
-export default ExcelTable;
+export default Charts;

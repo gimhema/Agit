@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Menu as MenuIcon, Send, AccountCircle, Settings } from "@mui/icons-material";
 import { Button, TextField, List, ListItemText, Divider, Paper, Typography, Avatar, Box, ListItemButton, Menu, MenuItem, IconButton } from "@mui/material";
 import Monitoring from "../views/Monitoring";
-
+import Charts from "../views/Charts";
 
 const App = () => {
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
   const [isMonitoringView, setIsMonitoringView] = useState(false);
+  const [isChartView, setIsChartView] = useState(false);
   const [channels] = useState(["Monitoring", "CommandLine", "Charts"]);
   const [selectedChannel, setSelectedChannel] = useState("CommandLine");
   const [messages, setMessages] = useState<{ user: string; text: string; time: string }[]>([]);
@@ -68,12 +69,18 @@ const App = () => {
               <ListItemButton
                 key={channel}
                 onClick={() => { 
-                  if(channel == "Monitoring") {
+                  setSelectedChannel(channel);  // ✅ 채널 선택 상태 업데이트
+                  if (channel === "Monitoring") {
                     setIsMonitoringView(true);
-                    handleMenuClose();
+                    setIsChartView(false);
+                  } else if (channel === "Charts") {
+                    setIsChartView(true);
+                    setIsMonitoringView(false);
                   } else {
-                    setSelectedChannel(channel); setIsMonitoringView(false); 
+                    setIsMonitoringView(false);
+                    setIsChartView(false);
                   }
+                  handleMenuClose();
                 }}
                 sx={{
                   backgroundColor: selectedChannel === channel ? "#522653" : "transparent",
@@ -99,9 +106,12 @@ const App = () => {
       <Box sx={{ flex: 5, display: "flex", flexDirection: "column", backgroundColor: "white" }}>
         {isMonitoringView ? (
           <Monitoring />
-        ) : (
+        ) : isChartView ? (
+          <Charts />
+        )
+        : (
           <>
-            {/* 🔸 채팅 헤더 */}
+            🔸 채팅 헤더
             <Box sx={{ p: 3, borderBottom: "1px solid gray", display: "flex", alignItems: "center", backgroundColor: "white" }}>
               <Typography variant="h6">#{selectedChannel}</Typography>
             </Box>
