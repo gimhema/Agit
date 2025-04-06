@@ -12,7 +12,11 @@ const App = () => {
   const [isAgentInfoView, setIsAgentInfView] = useState(false);
 
   const [channels] = useState(["Monitoring", "CommandLine", "Charts", "AgentInfo"]);
-  const [selectedChannel, setSelectedChannel] = useState("CommandLine");
+
+  const [selectedChannel, setSelectedChannel] = useState<string | null>(null);
+  const [activeView, setActiveView] = useState<"Monitoring" | "CommandLine" | "Charts" | "AgentInfo" | null>(null);
+  
+  // const [selectedChannel, setSelectedChannel] = useState("CommandLine");
   const [messages, setMessages] = useState<{ user: string; text: string; time: string }[]>([]);
   const [input, setInput] = useState("");
 
@@ -72,26 +76,8 @@ const App = () => {
               <ListItemButton
                 key={channel}
                 onClick={() => { 
-                  setSelectedChannel(channel);  // ✅ 채널 선택 상태 업데이트
-                  if (channel === "Monitoring") {
-                    setIsMonitoringView(true);
-                    setIsChartView(false);
-                    setIsAgentInfView(false);
-                  } else if (channel === "Charts") {
-                    setIsChartView(true);
-                    setIsMonitoringView(false);
-                    setIsAgentInfView(false);
-                  } 
-                  else if(channel == "AgentInfo") {
-                    setIsAgentInfView(true);
-                    setIsMonitoringView(false);
-                    setIsChartView(false);
-                  }
-                  else {
-                    setIsMonitoringView(false);
-                    setIsChartView(false);
-                    setIsAgentInfView(false);
-                  }
+                  setSelectedChannel(channel);
+                  setActiveView(channel as "Monitoring" | "CommandLine" | "Charts" | "AgentInfo");
                   handleMenuClose();
                 }}
                 sx={{
@@ -116,11 +102,11 @@ const App = () => {
 
       {/* 🔹 우측 메인 화면 */}
       <Box sx={{ flex: 5, display: "flex", flexDirection: "column", backgroundColor: "white" }}>
-        {isMonitoringView ? (
+        {selectedChannel == "Monitoring" ? (
           <Monitoring />
-        ) : isChartView ? (
+        ) : selectedChannel == "Charts" ? (
           <Charts />
-        ) : isAgentInfoView ? (
+        ) : selectedChannel == "AgentInfo" ? (
           <AgentInfo/>
         )
         : (
