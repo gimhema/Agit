@@ -3,12 +3,15 @@ import { Menu as MenuIcon, Send, AccountCircle, Settings } from "@mui/icons-mate
 import { Button, TextField, List, ListItemText, Divider, Paper, Typography, Avatar, Box, ListItemButton, Menu, MenuItem, IconButton } from "@mui/material";
 import Monitoring from "../views/Monitoring";
 import Charts from "../views/Charts";
+import AgentInfo from "../views/AgentInfo";
 
 const App = () => {
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
   const [isMonitoringView, setIsMonitoringView] = useState(false);
   const [isChartView, setIsChartView] = useState(false);
-  const [channels] = useState(["Monitoring", "CommandLine", "Charts"]);
+  const [isAgentInfoView, setIsAgentInfView] = useState(false);
+
+  const [channels] = useState(["Monitoring", "CommandLine", "Charts", "AgentInfo"]);
   const [selectedChannel, setSelectedChannel] = useState("CommandLine");
   const [messages, setMessages] = useState<{ user: string; text: string; time: string }[]>([]);
   const [input, setInput] = useState("");
@@ -73,12 +76,21 @@ const App = () => {
                   if (channel === "Monitoring") {
                     setIsMonitoringView(true);
                     setIsChartView(false);
+                    setIsAgentInfView(false);
                   } else if (channel === "Charts") {
                     setIsChartView(true);
                     setIsMonitoringView(false);
-                  } else {
+                    setIsAgentInfView(false);
+                  } 
+                  else if(channel == "AgentInfo") {
+                    setIsAgentInfView(true);
                     setIsMonitoringView(false);
                     setIsChartView(false);
+                  }
+                  else {
+                    setIsMonitoringView(false);
+                    setIsChartView(false);
+                    setIsAgentInfView(false);
                   }
                   handleMenuClose();
                 }}
@@ -108,6 +120,8 @@ const App = () => {
           <Monitoring />
         ) : isChartView ? (
           <Charts />
+        ) : isAgentInfoView ? (
+          <AgentInfo/>
         )
         : (
           <>

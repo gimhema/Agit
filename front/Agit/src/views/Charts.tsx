@@ -22,7 +22,7 @@ const Charts = () => {
   const [rows, setRows] = useState(initialRows);
 
   return (
-    <Box sx={{ height: 400, width: "100%", padding: 3 }}>
+    <Box sx={{ height: 400, minWidth: 800, maxWidth: "100%", padding: 3 }}>
       <Typography variant="h6" fontWeight="bold" mb={2}>
         Employee Data
       </Typography>
