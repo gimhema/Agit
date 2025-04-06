@@ -7,16 +7,12 @@ import AgentInfo from "../views/AgentInfo";
 
 const App = () => {
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
-  const [isMonitoringView, setIsMonitoringView] = useState(false);
-  const [isChartView, setIsChartView] = useState(false);
-  const [isAgentInfoView, setIsAgentInfView] = useState(false);
 
   const [channels] = useState(["Monitoring", "CommandLine", "Charts", "AgentInfo"]);
 
   const [selectedChannel, setSelectedChannel] = useState<string | null>(null);
   const [activeView, setActiveView] = useState<"Monitoring" | "CommandLine" | "Charts" | "AgentInfo" | null>(null);
   
-  // const [selectedChannel, setSelectedChannel] = useState("CommandLine");
   const [messages, setMessages] = useState<{ user: string; text: string; time: string }[]>([]);
   const [input, setInput] = useState("");
 
@@ -29,7 +25,6 @@ const App = () => {
   };
 
   const handleNewChannelClick = () => {
-    setIsMonitoringView(true);
     handleMenuClose();
   };
 
